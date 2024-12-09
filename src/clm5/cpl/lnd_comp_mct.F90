@@ -16,7 +16,10 @@ module lnd_comp_mct
   use oas_defineMod     , only : oas_definitions_init
 #ifdef COUP_OAS_ICON
   use oas_sendReceiveMod, only : oas_receive_icon, oas_send_icon
-#endif                   
+#endif          
+#ifdef COUP_OAS_REGCM
+  use oas_sendReceiveMod, only : oas_receive_regcm, oas_send_regcm
+#endif
 #ifdef COUP_OAS_PFL
    use oas_sendReceiveMod, only : oas_receive, oas_send
 #endif
@@ -405,8 +408,9 @@ contains
          rof_prognostic=rof_prognostic, &
          glc_present=glc_present)
 
-#ifndef COUP_OAS_ICON
-    ! Map MCT to land data type
+!#ifndef COUP_OAS_ICON
+#if defined(COUP_OAS_ICON) || defined(COUP_OAS_REGCM)
+! Map MCT to land data type
     ! Perform downscaling if appropriate
 
     
@@ -462,7 +466,19 @@ contains
        if (nlend_sync .and. dosend) nlend = .true.
 
 #ifdef COUP_OAS_ICON
-       call oas_receive_icon(bounds, time_elapsed, x2l = x2l_l%rattr)
+call oas_receive_icon(bounds, time_elapsed, x2l = x2l_l%rattr)
+
+       call t_startf ('lc_lnd_import')
+       call lnd_import( bounds, &
+          x2l = x2l_l%rattr, &
+          glc_present = glc_present, &
+          atm2lnd_inst = atm2lnd_inst, &
+          glc2lnd_inst = glc2lnd_inst)
+       call t_stopf ('lc_lnd_import')
+#endif
+
+#ifdef COUP_OAS_REGCM
+call oas_receive_regcm(bounds, time_elapsed, x2l = x2l_l%rattr)
 
        call t_startf ('lc_lnd_import')
        call lnd_import( bounds, &
@@ -491,6 +507,13 @@ contains
 #if defined(COUP_OAS_ICON)
        call oas_send_icon(bounds, time_elapsed, lnd2atm_inst)
 #endif
+
+
+#if defined(COUP_OAS_REGCM)
+       call oas_send_regcm(bounds, time_elapsed, lnd2atm_inst)
+#endif
+
+
 
 #if defined(COUP_OAS_PFL)
        call oas_send(bounds, time_elapsed, lnd2atm_inst)

@@ -204,7 +204,8 @@ contains
 
        atm2lnd_inst%forc_rh_grc(g) = 100.0_r8*(forc_q / qsat)
 
-#ifndef COUP_OAS_ICON
+      
+#if defined(COUP_OAS_ICON) || defined(COUP_OAS_REGCM)
        ! Check that solar, specific-humidity and LW downward aren't negative
        if ( atm2lnd_inst%forc_lwrad_not_downscaled_grc(g) <= 0.0_r8 )then
           call endrun( sub//' ERROR: Longwave down sent from the atmosphere model is negative or zero' )

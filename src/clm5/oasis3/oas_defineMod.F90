@@ -27,6 +27,10 @@ contains
 #ifdef COUP_OAS_ICON
     integer              :: jg                ! loop counter
 #endif
+#ifdef COUP_OAS_REGCM
+    integer              :: jg                ! loop counter
+#endif
+
 
     ! oasis_def_var
     integer              :: var_nodims(2)     ! var dimension parameters
@@ -158,24 +162,59 @@ contains
 
     !    
 
+
+
+#endif
+#ifdef COUP_OAS_REGCM
+    var_nodims(1) = 1         ! unused
+    var_nodims(2) = 1         ! number of fields in a bundle
+
+    ! get from REGCM
+    CALL oasis_def_var(oas_id_t,  "CLMTEMPE", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 1 
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMTEMPE.')
+    CALL oasis_def_var(oas_id_u,  "CLMUWIND", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 2
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMUWIND.')
+    CALL oasis_def_var(oas_id_v,  "CLMVWIND", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 3
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMVWIND.')
+    CALL oasis_def_var(oas_id_qv, "CLMSPWAT", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 4
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMSPWAT.')
+    CALL oasis_def_var(oas_id_ht, "CLMTHICK", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 5
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMTHICK.')
+    CALL oasis_def_var(oas_id_pr, "CLMPRESS", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 6
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMPRESS.')
+    CALL oasis_def_var(oas_id_rs, "CLMDIRSW", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 7
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMDIRSW.')
+    CALL oasis_def_var(oas_id_fs, "CLMDIFSW", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 8
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMDIFSW.')
+    CALL oasis_def_var(oas_id_lw, "CLMLONGW", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) ! 9
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMLONGW.')
+    CALL oasis_def_var(oas_id_cr, "CLMCVPRE", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) !10
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMCVPRE.')
+    CALL oasis_def_var(oas_id_gr, "CLMGSPRE", grid_id, var_nodims, OASIS_In, OASIS_Real, ierror) !11
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMGSPRE.')
+
+    ! send to REGCM
+    CALL oasis_def_var(oas_id_it, "CLMINFRA", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMINFRA.')
+    CALL oasis_def_var(oas_id_tx, "CLMTAUX" , grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !15
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMTAUX.')
+    CALL oasis_def_var(oas_id_ty, "CLMTAUY" , grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !16
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMTAUY.')
+    CALL oasis_def_var(oas_id_sh, "CLMSHFLX", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !17
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMSHFLX.')
+
     CALL oasis_def_var(oas_id_t2m, "CLMT2M", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_T2M.')
     CALL oasis_def_var(oas_id_q2m, "CLMQ2M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_Q2M.')
     CALL oasis_def_var(oas_id_u10, "CLMU10M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_U10M.')
-!    CALL oasis_def_var(oas_id_v10, "CLMV10M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
- !   IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_V10M.')
     CALL oasis_def_var(oas_id_evpr, "CLMEVPR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_EVPR.')
     CALL oasis_def_var(oas_id_ram1, "CLMRAM1", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAM1.')
     CALL oasis_def_var(oas_id_rah1, "CLMRAH1", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAH1.')
-    CALL oasis_def_var(oas_id_br, "CLMBR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
-    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_BR.')
-    !    CALL oasis_def_var(oas_id_drag, "CLMDRAG", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
-    !IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_DRAG.')
     CALL oasis_def_var(oas_id_sncv, "CLMSNCV", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_SNCV.')
     CALL oasis_def_var(oas_id_wt, "CLMWT", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
@@ -188,6 +227,8 @@ contains
 
 
 #endif
+
+
 
     ! End definition phase
     call oasis_enddef(ierror)
