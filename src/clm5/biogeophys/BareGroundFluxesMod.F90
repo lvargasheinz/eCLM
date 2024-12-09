@@ -209,8 +209,9 @@ contains
          z0mg_col               => frictionvel_inst%z0mg_col                    , & ! Output: [real(r8) (:)   ]  roughness length, momentum [m]                                        
          z0hg_col               => frictionvel_inst%z0hg_col                    , & ! Output: [real(r8) (:)   ]  roughness length, sensible heat [m]                                   
          z0qg_col               => frictionvel_inst%z0qg_col                    , & ! Output: [real(r8) (:)   ]  roughness length, latent heat [m]                                     
-         rah1                   => frictionvel_inst%rah1_patch                  , & ! Output: [real(r8) (:)   ]  aerodynamical heat         resistance
-         
+#ifdef COUP_OAS_REGCM
+         rah1                   => frictionvel_inst%rah1_patch                  , & ! Output: [real(r8) (:)   ]  thermal resistance(s/m)
+#endif         
          ram1                   => frictionvel_inst%ram1_patch                  , & ! Output: [real(r8) (:)   ]  aerodynamical resistance (s/m)                                        
 
          htvp                   => energyflux_inst%htvp_col                     , & ! Input:  [real(r8) (:)   ]  latent heat of evaporation (/sublimation) [J/kg]                      
@@ -348,8 +349,9 @@ contains
          end if
 
          ram1(p) = ram  !pass value to global variable
+#ifdef COUP_OAS_REGCM
          rah1(p) = rah  !pass value to global variable
-
+#endif
          ! Output to patch-level data structures
          ! Derivative of fluxes with respect to ground temperature
          cgrnds(p) = raih

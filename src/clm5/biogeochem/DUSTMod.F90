@@ -53,7 +53,9 @@ module DUSTMod
   type, public :: dust_type
 
      real(r8), pointer, PUBLIC  :: flx_mss_vrt_dst_patch     (:,:) ! surface dust emission (kg/m**2/s) [ + = to atm] (ndst) 
+#ifdef COUP_OAS_REGCM
      real(r8), pointer, PUBLIC  :: lnd_frc_mbl_dst_patch     (:) ! ! Ground fraction emitting dust 
+#endif
      real(r8), pointer, private :: flx_mss_vrt_dst_tot_patch (:)   ! total dust flux into atmosphere
      real(r8), pointer, private :: vlc_trb_patch             (:,:) ! turbulent deposition velocity  (m/s) (ndst) 
      real(r8), pointer, private :: vlc_trb_1_patch           (:)   ! turbulent deposition velocity 1(m/s)
@@ -107,7 +109,9 @@ contains
     begc = bounds%begc ; endc = bounds%endc
 
     allocate(this%flx_mss_vrt_dst_patch     (begp:endp,1:ndst)) ; this%flx_mss_vrt_dst_patch     (:,:) = nan
+#ifdef COUP_OAS_REGCM
     allocate(this%lnd_frc_mbl_dst_patch     (begp:endp)) ; this%lnd_frc_mbl_dst_patch     (:) = nan
+#endif
     allocate(this%flx_mss_vrt_dst_tot_patch (begp:endp))        ; this%flx_mss_vrt_dst_tot_patch (:)   = nan
     allocate(this%vlc_trb_patch             (begp:endp,1:ndst)) ; this%vlc_trb_patch             (:,:) = nan
     allocate(this%vlc_trb_1_patch           (begp:endp))        ; this%vlc_trb_1_patch           (:)   = nan
@@ -222,7 +226,9 @@ contains
     real(r8) :: wnd_rfr_dlt         ! [m s-1] Reference windspeed excess over threshld
     real(r8) :: dst_slt_flx_rat_ttl
     real(r8) :: flx_mss_hrz_slt_ttl
+#ifdef COUP_OAS_REGCM
     real(r8) :: lnd_frc_mbl_dst ! Ground fraction emitting dust
+#endif
     real(r8) :: flx_mss_vrt_dst_ttl(bounds%begp:bounds%endp)
     real(r8) :: frc_thr_wet_fct
     real(r8) :: frc_thr_rgh_fct
@@ -262,8 +268,9 @@ contains
          
          fv                  => frictionvel_inst%fv_patch            , & ! Input:  [real(r8) (:)   ]  friction velocity (m/s) (for dust model)          
          u10                 => frictionvel_inst%u10_patch           , & ! Input:  [real(r8) (:)   ]  10-m wind (m/s) (created for dust model)          
-         
-         lnd_frc_mbl_dst         => dust_inst%lnd_frc_mbl_dst_patch            , & ! Input:  [real(r8) (:)   ]  basin factor                                      
+#ifdef COUP_OAS_REGCM         
+         lnd_frc_mbl_dst         => dust_inst%lnd_frc_mbl_dst_patch            , & ! Input:  [real(r8) (:)   ]  Ground fraction emitting dust
+#endif
          mbl_bsn_fct         => dust_inst%mbl_bsn_fct_col            , & ! Input:  [real(r8) (:)   ]  basin factor                                      
          flx_mss_vrt_dst     => dust_inst%flx_mss_vrt_dst_patch      , & ! Output: [real(r8) (:,:) ]  surface dust emission (kg/m**2/s)               
          flx_mss_vrt_dst_tot => dust_inst%flx_mss_vrt_dst_tot_patch    & ! Output: [real(r8) (:)   ]  total dust flux back to atmosphere (pft)
@@ -306,8 +313,9 @@ contains
 
       ! initialize variables which get passed to the atmosphere
       flx_mss_vrt_dst(bounds%begp:bounds%endp,:)=0._r8
+#ifdef COUP_OAS_REGCM         
       lnd_frc_mbl_dst(bounds%begp:bounds%endp)   = 0._r8
-
+#endif
       do fp = 1,num_nolakep
          p = filter_nolakep(fp)
          c = patch%column(p)
@@ -366,7 +374,9 @@ contains
             ! the following comes from subr. frc_thr_rgh_fct_get
             ! purpose: compute factor by which surface roughness increases threshold
             !          friction velocity (currently a constant)
+#ifdef COUP_OAS_REGCM         
             lnd_frc_mbl_dst(p) = lnd_frc_mbl(p)
+#endif
             frc_thr_rgh_fct = 1.0_r8
 
             ! the following comes from subr. frc_thr_wet_fct_get

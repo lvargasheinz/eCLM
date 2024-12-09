@@ -327,6 +327,13 @@ contains
 !         waterstate_inst%q_sf_patch (bounds%begp:bounds%endp), &
 !         lnd2atm_inst%q_sf_grc      (bounds%begg:bounds%endg), &
 !         p2c_scale_type='unity', c2l_scale_type= 'unity', l2g_scale_type='unity')
+!    call p2g(bounds, &
+!         frictionvel_inst%rah1_patch (bounds%begp:bounds%endp), &
+!         lnd2atm_inst%rah1_grc       (bounds%begg:bounds%endg), &
+!         p2c_scale_type='unity', c2l_scale_type= 'unity', l2g_scale_type='unity')
+#endif
+
+#ifdef COUP_OAS_REGCM
     call p2g(bounds,  &
          dust_inst%lnd_frc_mbl_dst(bounds%begp:bounds%endg), &
          lnd2atm_inst%vdustfrac_grc        (bounds%begg:bounds%endg), &
