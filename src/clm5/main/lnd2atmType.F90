@@ -35,9 +35,11 @@ module lnd2atmType
 
      ! lnd->atm
      real(r8), pointer :: t_rad_grc          (:)   => null() ! radiative temperature (Kelvin)
+     real(r8), pointer :: t_veg_grc          (:)   => null() ! vegetation temperature (Kelvin)
      real(r8), pointer :: t_ref2m_grc        (:)   => null() ! 2m surface air temperature (Kelvin)
      real(r8), pointer :: q_ref2m_grc        (:)   => null() ! 2m surface specific humidity (kg/kg)
      real(r8), pointer :: u_ref10m_grc       (:)   => null() ! 10m surface wind speed (m/sec)
+     real(r8), pointer :: v_ref10m_grc       (:)   => null() ! 10m surface wind speed (m/sec)
      real(r8), pointer :: h2osno_grc         (:)   => null() ! snow water (mm H2O)
      real(r8), pointer :: h2osoi_vol_grc     (:,:) => null() ! volumetric soil water (0~watsat, m3/m3, nlevgrnd) (for dust model)
      real(r8), pointer :: albd_grc           (:,:) => null() ! (numrad) surface albedo (direct)
@@ -54,6 +56,7 @@ module lnd2atmType
      real(r8), pointer :: net_carbon_exchange_grc(:) => null() ! net CO2 flux (kg CO2/m**2/s) [+ to atm]
      real(r8), pointer :: nem_grc            (:)   => null() ! gridcell average net methane correction to CO2 flux (g C/m^2/s)
      real(r8), pointer :: ram1_grc           (:)   => null() ! aerodynamical resistance (s/m)
+     real(r8), pointer :: vdustfrac_grc           (:)   => null() ! Ground fraction emitting dust 
      real(r8), pointer :: fv_grc             (:)   => null() ! friction velocity (m/s) (for dust model)
      real(r8), pointer :: flxdst_grc         (:,:) => null() ! dust flux (size bins)
      real(r8), pointer :: ddvel_grc          (:,:) => null() ! dry deposition velocities
@@ -61,10 +64,12 @@ module lnd2atmType
      real(r8), pointer :: fireflx_grc        (:,:) => null() ! Wild Fire Emissions
      real(r8), pointer :: fireztop_grc       (:)   => null() ! Wild Fire Emissions vertical distribution top
      real(r8), pointer :: flux_ch4_grc       (:)   => null() ! net CH4 flux (kg C/m**2/s) [+ to atm]
+     real(r8), pointer :: z0_grc      (:)   => null() ! roughness length
 #ifdef COUP_OAS_ICON
      real(r8), pointer :: t_sf_grc           (:)   => null() ! surface temperature (Kelvin)
 !     real(r8), pointer :: q_sf_grc           (:)   => null() ! surface humidity (kg/kg)
-!     real(r8), pointer :: rah1_grc           (:)   => null() ! aerodynamical resistance for heat (s/m)
+     real(r8), pointer :: rah1_grc           (:)   => null() ! aerodynamical resistance for heat (s/m)
+     real(r8), pointer :: br1_grc           (:)   => null() ! bulk richardson number
 #endif
      ! lnd->rof
      real(r8), pointer :: qflx_rofliq_grc         (:)   => null() ! rof liq forcing
@@ -154,9 +159,11 @@ contains
     begg = bounds%begg; endg = bounds%endg
 
     allocate(this%t_rad_grc          (begg:endg))            ; this%t_rad_grc          (:)   =ival
+    allocate(this%t_veg_grc          (begg:endg))            ; this%t_veg_grc          (:)   =ival
     allocate(this%t_ref2m_grc        (begg:endg))            ; this%t_ref2m_grc        (:)   =ival
     allocate(this%q_ref2m_grc        (begg:endg))            ; this%q_ref2m_grc        (:)   =ival
     allocate(this%u_ref10m_grc       (begg:endg))            ; this%u_ref10m_grc       (:)   =ival
+    allocate(this%v_ref10m_grc       (begg:endg))            ; this%v_ref10m_grc       (:)   =ival
     allocate(this%h2osno_grc         (begg:endg))            ; this%h2osno_grc         (:)   =ival
     allocate(this%h2osoi_vol_grc     (begg:endg,1:nlevgrnd)) ; this%h2osoi_vol_grc     (:,:) =ival
     allocate(this%albd_grc           (begg:endg,1:numrad))   ; this%albd_grc           (:,:) =ival
@@ -173,13 +180,16 @@ contains
     allocate(this%net_carbon_exchange_grc(begg:endg))        ; this%net_carbon_exchange_grc(:) =ival
     allocate(this%nem_grc            (begg:endg))            ; this%nem_grc            (:)   =ival
     allocate(this%ram1_grc           (begg:endg))            ; this%ram1_grc           (:)   =ival
+    allocate(this%vdustfrac_grc           (begg:endg))            ; this%vdustfrac_grc           (:)   =ival
     allocate(this%fv_grc             (begg:endg))            ; this%fv_grc             (:)   =ival
     allocate(this%flxdst_grc         (begg:endg,1:ndst))     ; this%flxdst_grc         (:,:) =ival
     allocate(this%flux_ch4_grc       (begg:endg))            ; this%flux_ch4_grc       (:)   =ival
+    allocate(this%z0_grc       (begg:endg))            ; this%z0_grc       (:)   =ival
 #ifdef COUP_OAS_ICON
     allocate(this%t_sf_grc           (begg:endg))            ; this%t_sf_grc           (:)   =ival
 !    allocate(this%q_sf_grc           (begg:endg))            ; this%q_sf_grc           (:)   =ival
-!    allocate(this%rah1_grc           (begg:endg))            ; this%rah1_grc           (:)   =ival
+    allocate(this%rah1_grc           (begg:endg))            ; this%rah1_grc           (:)   =ival
+    allocate(this%br1_grc           (begg:endg))            ; this%br1_grc           (:)   =ival
 #endif
     allocate(this%qflx_rofliq_grc    (begg:endg))            ; this%qflx_rofliq_grc    (:)   =ival
     allocate(this%qflx_rofliq_qsur_grc    (begg:endg))       ; this%qflx_rofliq_qsur_grc    (:)   =ival

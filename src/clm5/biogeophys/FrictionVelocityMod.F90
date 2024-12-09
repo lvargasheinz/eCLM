@@ -45,6 +45,7 @@ module FrictionVelocityMod
      real(r8), pointer, public :: rb1_patch        (:)   ! patch aerodynamical resistance (s/m) (for dry deposition of chemical tracers)
      real(r8), pointer, public :: rb10_patch       (:)   ! 10-day mean patch aerodynamical resistance (s/m) (for LUNA model)
      real(r8), pointer, public :: ram1_patch       (:)   ! patch aerodynamical resistance (s/m)
+     real(r8), pointer, public :: rah1_patch       (:)   ! patch heat resistance (s/m)
      real(r8), pointer, public :: z0m_patch        (:)   ! patch momentum roughness length (m)
      real(r8), pointer, public :: z0mv_patch       (:)   ! patch roughness length over vegetation, momentum [m]
      real(r8), pointer, public :: z0hv_patch       (:)   ! patch roughness length over vegetation, sensible heat [m]
@@ -122,6 +123,7 @@ contains
     allocate(this%rb1_patch        (begp:endp)) ; this%rb1_patch        (:)   = nan
     allocate(this%rb10_patch       (begp:endp)) ; this%rb10_patch       (:)   = spval
     allocate(this%ram1_patch       (begp:endp)) ; this%ram1_patch       (:)   = nan
+    allocate(this%rah1_patch       (begp:endp)) ; this%rah1_patch       (:)   = nan
     allocate(this%z0m_patch        (begp:endp)) ; this%z0m_patch        (:)   = nan
     allocate(this%z0mv_patch       (begp:endp)) ; this%z0mv_patch       (:)   = nan
     allocate(this%z0hv_patch       (begp:endp)) ; this%z0hv_patch       (:)   = nan
@@ -192,6 +194,12 @@ contains
        call hist_addfld1d (fname='RAM1', units='s/m', &
             avgflag='A', long_name='aerodynamical resistance ', &
             ptr_patch=this%ram1_patch, default='inactive')
+    end if
+    if (use_cn) then
+       this%rah1_patch(begp:endp) = spval
+       call hist_addfld1d (fname='RAH1', units='s/m', &
+            avgflag='A', long_name='thermal resistance', &
+            ptr_patch=this%rah1_patch, default='inactive')
     end if
 
     if (use_cn) then

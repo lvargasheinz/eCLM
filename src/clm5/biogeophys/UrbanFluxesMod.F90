@@ -269,6 +269,7 @@ contains
          forc_hgt_t_patch    =>   frictionvel_inst%forc_hgt_t_patch         , & ! Input:  [real(r8) (:)   ]  observational height of temperature at patch-level (m)
          zetamax             =>   frictionvel_parms_inst%zetamaxstable      , & ! Input:  [real(r8)       ]  max zeta value under stable conditions
          ram1                =>   frictionvel_inst%ram1_patch               , & ! Output: [real(r8) (:)   ]  aerodynamical resistance (s/m)                    
+         rah1                =>   frictionvel_inst%rah1_patch               , & ! Output: [real(r8) (:)   ]  heat resistance (s/m)                    
          u10_clm             =>   frictionvel_inst%u10_clm_patch            , & ! Input:  [real(r8) (:)   ]  10 m height winds (m/s)
 
          htvp                =>   energyflux_inst%htvp_col                  , & ! Input:  [real(r8) (:)   ]  latent heat of evaporation (/sublimation) (J/kg)  
@@ -658,6 +659,7 @@ contains
          l = patch%landunit(p)
 
          ram1(p) = ramu(l)  !pass value to global variable
+         rah1(p) = rahu(l)  !pass value to global variable
 
          ! Upward and downward canopy longwave are zero
 

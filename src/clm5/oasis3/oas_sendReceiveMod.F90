@@ -118,6 +118,21 @@ contains
      call oasis_put(oas_id_lh, seconds_elapsed,lnd2atm_inst%eflx_lh_tot_grc, info)   ! "CLM_LHFLX"
      call oasis_put(oas_id_st, seconds_elapsed,lnd2atm_inst%t_sf_grc, info)          ! "CLM_TGRND"
 
+
+     call oasis_put(oas_id_t2m, seconds_elapsed,lnd2atm_inst%t_ref2m_grc, info)          ! "CLM_T2M"
+     call oasis_put(oas_id_q2m, seconds_elapsed,lnd2atm_inst%q_ref2m_grc, info)          ! "CLM_Q2M"
+     call oasis_put(oas_id_u10, seconds_elapsed,lnd2atm_inst%u_ref10m_grc, info)          ! "CLM_U10M"
+ !    call oasis_put(oas_id_v10, seconds_elapsed,lnd2atm_inst%v_ref10m_grc, info)          ! "CLM_V10M"
+     call oasis_put(oas_id_evpr, seconds_elapsed,lnd2atm_inst%qflx_evap_tot_grc, info)          ! "CLM_EVPR"
+     call oasis_put(oas_id_ram1, seconds_elapsed,lnd2atm_inst%ram1_grc, info)          ! "CLM_RAM1"
+     call oasis_put(oas_id_rah1, seconds_elapsed,lnd2atm_inst%rah1_grc, info)          ! "CLM_RAH1"
+     call oasis_put(oas_id_br, seconds_elapsed,lnd2atm_inst%br1_grc, info)          ! "CLM_BR"
+ !    call oasis_put(oas_id_drag, seconds_elapsed,lnd2atm_inst%t_sf_grc, info)          ! "CLM_DRAG"
+     call oasis_put(oas_id_sncv, seconds_elapsed,lnd2atm_inst%h2osno_grc, info)          ! "CLM_SNCV"
+     call oasis_put(oas_id_wt, seconds_elapsed,lnd2atm_inst%vdustfrac_grc, info)          ! "CLM_WT"
+     call oasis_put(oas_id_zo, seconds_elapsed,lnd2atm_inst%z0_grc, info)          ! "CLM_ZO"
+     call oasis_put(oas_id_tlef, seconds_elapsed,lnd2atm_inst%t_veg_grc, info)          ! "CLM_TLEF"
+
   end subroutine oas_send_icon
 #endif
 

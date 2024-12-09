@@ -194,6 +194,7 @@ contains
          forc_hgt_q_patch =>    frictionvel_inst%forc_hgt_q_patch      , & ! Input:  [real(r8) (:)   ]  observational height of specific humidity at pft level [m]
          zetamax          =>    frictionvel_parms_inst%zetamaxstable   , & ! Input:  [real(r8)       ]  max zeta value under stable conditions
          ram1             =>    frictionvel_inst%ram1_patch            , & ! Output: [real(r8) (:)   ]  aerodynamical resistance (s/m)                    
+         rah1             =>    frictionvel_inst%rah1_patch            , & ! Output: [real(r8) (:)   ]  heat resistance (s/m)                    
 
          q_ref2m          =>    waterstate_inst%q_ref2m_patch          , & ! Output: [real(r8) (:)   ]  2 m height surface specific humidity (kg/kg)      
          rh_ref2m         =>    waterstate_inst%rh_ref2m_patch         , & ! Output: [real(r8) (:)   ]  2 m height surface relative humidity (%)          
@@ -419,6 +420,7 @@ contains
             ram1(p) = ram(p)       ! pass value to global variable
             ram1_lake(p) = ram1(p) ! for history
 
+            rah1(p) = rah(p)       ! pass value to global variable
             ! Get derivative of fluxes with respect to ground temperature
 
             stftg3(p) = emg_lake*sb*tgbef(c)*tgbef(c)*tgbef(c)

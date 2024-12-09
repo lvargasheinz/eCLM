@@ -156,6 +156,37 @@ contains
     CALL oasis_def_var(oas_id_st, "CLMTGRND", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !19
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLMTGRND.')
 
+    !    
+
+    CALL oasis_def_var(oas_id_t2m, "CLMT2M", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_T2M.')
+    CALL oasis_def_var(oas_id_q2m, "CLMQ2M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_Q2M.')
+    CALL oasis_def_var(oas_id_u10, "CLMU10M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_U10M.')
+!    CALL oasis_def_var(oas_id_v10, "CLMV10M", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+ !   IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_V10M.')
+    CALL oasis_def_var(oas_id_evpr, "CLMEVPR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_EVPR.')
+    CALL oasis_def_var(oas_id_ram1, "CLMRAM1", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAM1.')
+    CALL oasis_def_var(oas_id_rah1, "CLMRAH1", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAH1.')
+    CALL oasis_def_var(oas_id_br, "CLMBR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_BR.')
+    !    CALL oasis_def_var(oas_id_drag, "CLMDRAG", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    !IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_DRAG.')
+    CALL oasis_def_var(oas_id_sncv, "CLMSNCV", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_SNCV.')
+    CALL oasis_def_var(oas_id_wt, "CLMWT", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_WT.')
+    CALL oasis_def_var(oas_id_zo, "CLMZO", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_ZO.')
+    CALL oasis_def_var(oas_id_tlef, "CLMTLEF", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_TLEF.')
+
+
+
 #endif
 
     ! End definition phase
