@@ -126,7 +126,7 @@ contains
      call oasis_put(oas_id_evpr, seconds_elapsed,lnd2atm_inst%qflx_evap_tot_grc, info)          ! "CLM_EVPR"
      call oasis_put(oas_id_ram1, seconds_elapsed,lnd2atm_inst%ram1_grc, info)          ! "CLM_RAM1"
      call oasis_put(oas_id_rah1, seconds_elapsed,lnd2atm_inst%rah1_grc, info)          ! "CLM_RAH1"
-     call oasis_put(oas_id_br, seconds_elapsed,lnd2atm_inst%br1_grc, info)          ! "CLM_BR"
+ !    call oasis_put(oas_id_br, seconds_elapsed,lnd2atm_inst%br1_grc, info)          ! "CLM_BR"
  !    call oasis_put(oas_id_drag, seconds_elapsed,lnd2atm_inst%t_sf_grc, info)          ! "CLM_DRAG"
      call oasis_put(oas_id_sncv, seconds_elapsed,lnd2atm_inst%h2osno_grc, info)          ! "CLM_SNCV"
      call oasis_put(oas_id_wt, seconds_elapsed,lnd2atm_inst%vdustfrac_grc, info)          ! "CLM_WT"
