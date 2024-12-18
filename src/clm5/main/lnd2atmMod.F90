@@ -344,6 +344,35 @@ contains
          frictionvel_inst%t_veg_patch (bounds%begp:bounds%endp), &
          lnd2atm_inst%t_veg_grc       (bounds%begg:bounds%endg), &
          p2c_scale_type='unity', c2l_scale_type= 'unity', l2g_scale_type='unity')
+    call c2g(bounds, nlevgrnd, &
+         waterstate_inst%h2osoi_vol_col (bounds%begc:bounds%endc, :), &
+         lnd2atm_inst%h2osoi_vol_grc    (bounds%begg:bounds%endg, :), &
+         c2l_scale_type= 'urbanf', l2g_scale_type='unity')
+    call c2g(bounds, nlevgrnd, &
+         waterstate_inst%t_soisno_col (bounds%begc:bounds%endc, :), &
+         lnd2atm_inst%t_soisno_grc    (bounds%begg:bounds%endg, :), &
+         c2l_scale_type= 'urbanf', l2g_scale_type='unity')
+    call c2g(bounds, nlevgrnd, &
+         waterstate_inst%h2osoi_ice_col (bounds%begc:bounds%endc, :), &
+         lnd2atm_inst%h2osoi_ice_grc    (bounds%begg:bounds%endg, :), &
+         c2l_scale_type= 'urbanf', l2g_scale_type='unity')
+    call c2g(bounds, nlevgrnd, &
+         waterstate_inst%h2osoi_liq_col (bounds%begc:bounds%endc, :), &
+         lnd2atm_inst%h2osoi_liq_grc    (bounds%begg:bounds%endg, :), &
+         c2l_scale_type= 'urbanf', l2g_scale_type='unity')
+    call c2g(bounds, &
+         waterstate_inst%h2osoi_liqice_10cm_col (bounds%begp:bounds%endp), &
+         lnd2atm_inst%h2o10cm_grc      (bounds%begg:bounds%endg), &
+         c2l_scale_type='unity', l2g_scale_type= 'urbanf') !#, l2g_scale_type='unity')
+    call c2g(bounds, &
+        waterstate_inst%qflx_snow_drain_col (bounds%begp:bounds%endp), &
+         lnd2atm_inst%qflx_snowmelt_grc      (bounds%begg:bounds%endg), &
+         c2l_scale_type='unity', l2g_scale_type= 'urbanf') !#, l2g_scale_type='unity')
+    call p2g(bounds, &
+         frictionvel_inst%tlai_patch (bounds%begp:bounds%endp), &
+         lnd2atm_inst%tlai_grc       (bounds%begg:bounds%endg), &
+         p2c_scale_type='unity', c2l_scale_type= 'unity', l2g_scale_type='unity')
+
 #endif
 
     !----------------------------------------------------

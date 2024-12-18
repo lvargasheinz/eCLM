@@ -132,6 +132,20 @@ contains
      call oasis_put(oas_id_wt, seconds_elapsed,lnd2atm_inst%vdustfrac_grc, info)          ! "CLM_WT"
      call oasis_put(oas_id_zo, seconds_elapsed,lnd2atm_inst%z0_grc, info)          ! "CLM_ZO"
      call oasis_put(oas_id_tlef, seconds_elapsed,lnd2atm_inst%t_veg_grc, info)          ! "CLM_TLEF"
+     call oasis_put(oas_id_flxvoc, seconds_elapsed,lnd2atm_inst%eflx_sh_tot_grc, info)   ! "CLM_FLXVOC"
+     call oasis_put(oas_id_flxdst, seconds_elapsed,lnd2atm_inst%eflx_sh_tot_grc, info)   ! "CLM_FLXDST"
+     call oasis_put(oas_id_fluxch4, seconds_elapsed,lnd2atm_inst%eflx_sh_tot_grc, info)   ! "CLM_FLUXCH4"
+     call oasis_put(oas_id_ddvel, seconds_elapsed,lnd2atm_inst%eflx_sh_tot_grc, info)   ! "CLM_DDVEL"
+
+     call oasis_put(oas_id_tlai, seconds_elapsed,lnd2atm_inst%tlai_grc, info)   ! "CLM_TLAI"
+     call oasis_put(oas_id_roff, seconds_elapsed,lnd2atm_inst%qflx_rofliq_grc, info)   ! "CLM_ROFF"
+     call oasis_put(oas_id_srf_roff, seconds_elapsed,lnd2atm_inst%qflx_rofliq_qsur_grc, info)   ! "CLM_SRFROFF"
+     call oasis_put(oas_id_snowmelt, seconds_elapsed,lnd2atm_inst%qflx_snowmelt_grc, info)   ! "CLM_SNWMELT"
+     call oasis_put(oas_id_tsoi, seconds_elapsed,lnd2atm_inst%t_soisno_grc(:,:), info)   ! "CLM_TSOI"
+     call oasis_put(oas_id_h2ovol, seconds_elapsed,lnd2atm_inst%h2osoi_vol_grc(:,:), info)   ! "CLM_H2OVOL"
+     call oasis_put(oas_id_h2osoi_liq, seconds_elapsed,lnd2atm_inst%h2osoi_liq_grc(:,:), info)   ! "CLM_H2OLIQ"
+     call oasis_put(oas_id_h2osoi_ice, seconds_elapsed,lnd2atm_inst%h2osoi_ice_grc(:,:), info)   ! "CLM_H2OICE"
+     call oasis_put(oas_id_h2o10cm, seconds_elapsed,lnd2atm_inst%h2o10cm_grc, info)   ! "CLM_H2O10cm"
 
   end subroutine oas_send_icon
 #endif

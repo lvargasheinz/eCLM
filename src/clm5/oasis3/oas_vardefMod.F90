@@ -35,6 +35,22 @@ module oas_vardefMod
   integer ::   oas_id_sh      ! sensible heat flux (W/m2)
   integer ::   oas_id_lh      ! latent heat flux (W/m2)
   integer ::   oas_id_st      ! surface temperature (K)
+  integer ::   oas_id_flxvoc      ! radiation temperature (K)
+  integer ::   oas_id_flxdst      ! radiation temperature (K)
+  integer ::   oas_id_fluxch4      ! radiation temperature (K)
+  integer ::   oas_id_ddvel      ! radiation temperature (K)
+  integer ::   oas_id_t2m      !  2 m height surface air temperature (Kelvin)  
+  integer ::   oas_id_q2m      !  2 m height surface specific humidity (kg/kg)
+  integer ::   oas_id_u10      ! atmospheric wind speed (m/s)
+  integer ::   oas_id_evpr      ! total latent heat ?? CHECK LUIZA
+  integer ::   oas_id_ram1      !  aerodynamical resistance (s/m)
+  integer ::   oas_id_rah1      ! thermal resistance (s/m)
+  integer ::   oas_id_sncv     ! snow water (mm H2O)  
+  integer ::   oas_id_wt      ! fraction of ground emittimg dust
+  integer ::   oas_id_zo      ! roughness length over vegetation, momentum
+  integer ::   oas_id_tlef      !  vegetation temperature (Kelvin)
+
+  
 #endif
 
 end module oas_vardefMod

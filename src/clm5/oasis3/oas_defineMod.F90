@@ -172,8 +172,8 @@ contains
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAM1.')
     CALL oasis_def_var(oas_id_rah1, "CLMRAH1", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_RAH1.')
-    CALL oasis_def_var(oas_id_br, "CLMBR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
-    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_BR.')
+!!    CALL oasis_def_var(oas_id_br, "CLMBR", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+  !  IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_BR.')
     !    CALL oasis_def_var(oas_id_drag, "CLMDRAG", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     !IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_DRAG.')
     CALL oasis_def_var(oas_id_sncv, "CLMSNCV", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
@@ -185,6 +185,33 @@ contains
     CALL oasis_def_var(oas_id_tlef, "CLMTLEF", grid_id, var_nodims, OASIS_Out,OASIS_Real, ierror) !12
     IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_TLEF.')
 
+    CALL oasis_def_var(oas_id_flxvoc, "CLMFLXVOC", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_FLXVOC.')
+   CALL oasis_def_var(oas_id_flxdst, "CLMFLXDST", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_FLXDST.')
+   CALL oasis_def_var(oas_id_fluxch4, "CLMFLUXCH4", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_FLUXCH4.')
+   CALL oasis_def_var(oas_id_ddvel, "CLMDDVEL", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_DDVEL.')
+
+   CALL oasis_def_var(oas_id_h2ovol, "CLMH2OVOL", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_H2OVOL.')
+   CALL oasis_def_var(oas_id_h2osoi_ice, "CLMH2OICE", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_H2OICE.')
+   CALL oasis_def_var(oas_id_h2osoi_liq, "CLMH2OLIQ", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_H2OLIQ.')
+   CALL oasis_def_var(oas_id_h2o10cm, "CLMH2O10cm", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_H2O10cm.')
+   CALL oasis_def_var(oas_id_tsoi, "CLMTSOI", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_TSOI.')
+   CALL oasis_def_var(oas_id_tlai, "CLMTLAI", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_TLAI.')
+   CALL oasis_def_var(oas_id_roff, "CLMROFF", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_ROFF.')
+   CALL oasis_def_var(oas_id_srf_roff, "CLMSRFROFF", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_SRFROFF.')
+   CALL oasis_def_var(oas_id_snowmelt, "CLMTSNWMELT", grid_id, var_nodims, OASIS_Out, OASIS_Real, ierror) !12
+    IF (ierror /= 0) CALL oasis_abort(oas_comp_id, oas_comp_name, 'Failure in oasis_def_var for CLM_SNWMELT.')
 
 
 #endif

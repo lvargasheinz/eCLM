@@ -70,6 +70,16 @@ module lnd2atmType
 !     real(r8), pointer :: q_sf_grc           (:)   => null() ! surface humidity (kg/kg)
      real(r8), pointer :: rah1_grc           (:)   => null() ! aerodynamical resistance for heat (s/m)
 !     real(r8), pointer :: br1_grc           (:)   => null() ! bulk richardson number
+     real(r8), pointer :: t_soisno_grc     (:,:) => null() ! volumetric soil water (0~watsat, m3/m3, nlevgrnd) (for dust model)
+     real(r8), pointer :: h2osoi_ice_grc     (:,:) => null() ! volumetric soil water (0~watsat, m3/m3, nlevgrnd) (for dust model)
+     real(r8), pointer :: h2osoi_liq_grc     (:,:) => null() ! volumetric soil water (0~watsat, m3/m3, nlevgrnd) (for dust model)
+     real(r8), pointer :: h2o10cm_grc       (:) => null() ! volumetric soil water (0~watsat, m3/m3, nlevgrnd) (for dust model)
+!     real(r8), pointer :: br1_grc           (:)   => null() ! bulk richardson number
+     real(r8), pointer :: t_veg_grc          (:)   => null() ! vegetation temperature (Kelvin)
+     real(r8), pointer :: tlai_grc          (:)   => null() ! vegetation temperature (Kelvin)
+     real(r8), pointer :: vdustfrac_grc           (:)   => null() ! Ground fraction emitting dust 
+     real(r8), pointer :: z0_grc      (:)   => null() ! roughness length
+     real(r8), pointer :: qflx_snowmelt_grc         (:)   => null() ! rof liq forcing
 #endif
      ! lnd->rof
      real(r8), pointer :: qflx_rofliq_grc         (:)   => null() ! rof liq forcing
@@ -190,6 +200,15 @@ contains
 !    allocate(this%q_sf_grc           (begg:endg))            ; this%q_sf_grc           (:)   =ival
     allocate(this%rah1_grc           (begg:endg))            ; this%rah1_grc           (:)   =ival
 !    allocate(this%br1_grc           (begg:endg))            ; this%br1_grc           (:)   =ival
+    allocate(this%t_soisno_grc     (begg:endg,1:nlevgrnd)) ; this%t_soisno_grc     (:,:) =ival
+    allocate(this%h2osoi_ice_grc     (begg:endg,1:nlevgrnd)) ; this%h2osoi_ice_grc     (:,:) =ival
+    allocate(this%h2osoi_liq_grc     (begg:endg,1:nlevgrnd)) ; this%h2osoi_liq_grc     (:,:) =ival
+    allocate(this%h2o10cm_grc       (begg:endg))            ; this%h2o10cm_grc       (:)   =ival
+    allocate(this%z0_grc       (begg:endg))            ; this%z0_grc       (:)   =ival
+    allocate(this%vdustfrac_grc           (begg:endg))            ; this%vdustfrac_grc           (:)   =ival
+    allocate(this%t_veg_grc          (begg:endg))            ; this%t_veg_grc          (:)   =ival
+    allocate(this%tlai_grc           (begg:endg))            ; this%tlai_grc           (:)   =ival
+    allocate(this%qflx_snowmelt_grc    (begg:endg))       ; this%qflx_snowmelt_grc    (:)   =ival
 #endif
     allocate(this%qflx_rofliq_grc    (begg:endg))            ; this%qflx_rofliq_grc    (:)   =ival
     allocate(this%qflx_rofliq_qsur_grc    (begg:endg))       ; this%qflx_rofliq_qsur_grc    (:)   =ival
