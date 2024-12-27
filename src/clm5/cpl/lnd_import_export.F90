@@ -340,6 +340,21 @@ contains
        l2x(index_l2x_Fall_lwup,i)   = -lnd2atm_inst%eflx_lwrad_out_grc(g)
        l2x(index_l2x_Fall_evap,i)   = -lnd2atm_inst%qflx_evap_tot_grc(g)
        l2x(index_l2x_Fall_swnet,i)  =  lnd2atm_inst%fsa_grc(g)
+#ifdef COUP_OAS_ICON
+       l2x(index_l2x_Sl_tsf,i)  =  lnd2atm_inst%t_sf_grc(g)
+       l2x(index_l2x_Sl_z0,i)  =  lnd2atm_inst%z0_grc(g)
+       l2x(index_l2x_Sl_tveg,i)  =  lnd2atm_inst%t_veg_grc(g)
+       l2x(index_l2x_Sl_tlai,i)  =  lnd2atm_inst%tlai_grc(g)
+       l2x(index_l2x_Flrl_snwmelt,i) = lnd2atm_inst%qflx_snowmelt_grc(g)
+       l2x(index_l2x_Flrl_roff,i) = lnd2atm_inst%qflx_rofliq_grc(g)
+       l2x(index_l2x_Flrl_srfroff,i) = lnd2atm_inst%qflx_rofliq_qsur_grc(g)
+       l2x(index_l2x_Sl_tsoi,i)  =  lnd2atm_inst%tsoi_grc(g,:)
+       if (index_l2x_Sl_rah1      /= 0 )  l2x(index_l2x_Sl_rah1,i)     =  lnd2atm_inst%rah1_grc(g)
+       if (index_l2x_Sl_h2o10cm      /= 0 )  l2x(index_l2x_Sl_h2o10cm,i)     =  lnd2atm_inst%h2o10cm_grc(g)
+       l2x(index_l2x_Sl_vdustfrac,i)  =  lnd2atm_inst%vdustfrac_grc(g)
+       if (index_l2x_Sl_h2osoi_liq     /= 0 )  l2x(index_l2x_Sl_h2osoi_liq,i)    =  lnd2atm_inst%h2osoi_liq_grc(g,:)
+       if (index_l2x_Sl_h2osoi_ice     /= 0 )  l2x(index_l2x_Sl_h2osoi_ice,i)    =  lnd2atm_inst%h2osoi_ice_grc(g,:)       
+#endif
        if (index_l2x_Fall_fco2_lnd /= 0) then
           l2x(index_l2x_Fall_fco2_lnd,i) = -lnd2atm_inst%net_carbon_exchange_grc(g)  
        end if
@@ -399,6 +414,8 @@ contains
 
        ! irrigation flux to be removed from main channel storage (negative)
        l2x(index_l2x_Flrl_irrig,i) = - lnd2atm_inst%qirrig_grc(g)
+
+       ! snowmelt flux
 
        ! glc coupling
        ! We could avoid setting these fields if glc_present is .false., if that would

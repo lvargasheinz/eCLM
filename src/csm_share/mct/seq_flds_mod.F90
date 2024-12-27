@@ -1082,6 +1082,100 @@ contains
     attname  = 'Sx_t'
     call metadata_set(attname, longname, stdname, units)
 
+   ! Soil water (ice)
+    call seq_flds_add(l2x_states,"Sl_h2osoi_ice")
+    call seq_flds_add(x2a_states,"Sl_h2osoi_ice")
+    longname = 'Soil water (ice)'
+    stdname  = 'soil_water_ice'
+    units    = 'kg/m^2'
+    attname  = 'Sl_h2osoi_ice'
+    call metadata_set(attname, longname, stdname, units)
+
+   ! Soil water (liquid)
+    call seq_flds_add(l2x_states,"Sl_h2osoi_liq")
+    call seq_flds_add(x2a_states,"Sl_h2osoi_liq")
+    longname = 'Soil water (liquid)'
+    stdname  = 'soil_water_liq'
+    units    = 'kg/m^2'
+    attname  = 'Sl_h2osoi_liq'
+    call metadata_set(attname, longname, stdname, units)
+
+    !'Soil water in first 10 cm'
+    call seq_flds_add(l2x_states,"Sl_h2o10cm")
+    call seq_flds_add(x2a_states,"Sl_h2o10cm")
+    longname = 'Soil water in first 10 cm'
+    stdname  = 'soil_water_10cm'
+    units    = 'kg/m^2'
+    attname  = 'Sl_h2o10cm'
+    call metadata_set(attname, longname, stdname, units)
+
+
+
+    ! Thermal resistance
+    call seq_flds_add(l2x_states,"Sl_rah1")
+    call seq_flds_add(x2a_states,"Sl_rah1")
+    longname = 'Thermal resistance'
+    stdname  = 'thermal_resistance'
+    units    = 's/m'
+    attname  = 'Sl_rah1'
+    call metadata_set(attname, longname, stdname, units)
+
+ 
+    ! Roughness length over vegetation, momentum
+    call seq_flds_add(l2x_states,"Sl_z0")
+    call seq_flds_add(x2a_states,"Sl_z0")
+    longname = 'Roughness length over vegetation, momentum'
+    stdname  = 'rougness_veg_momentum'
+    units    = 'm'
+    attname  = 'Sl_z0'
+    call metadata_set(attname, longname, stdname, units)
+
+    ! Vegetation temperature
+    call seq_flds_add(l2x_states,"Sl_tveg")
+    call seq_flds_add(x2a_states,"Sl_tveg")
+    longname = 'Vegetation temperature'
+    stdname  = 'vegetation_temperature'
+    units    = 'K'
+    attname  = 'Sl_tveg'
+    call metadata_set(attname, longname, stdname, units)
+
+    ! Total leaf area index at grid level
+    call seq_flds_add(l2x_states,"Sl_tlai")
+    call seq_flds_add(x2a_states,"Sl_tlai")
+    longname = 'Total leaf area index at grid level'
+    stdname  = 'leaf_area_index'
+    units    = '-'
+    attname  = 'Sl_tlai'
+    call metadata_set(attname, longname, stdname, units)
+
+    ! Soil/snow temperaure profilse
+    call seq_flds_add(l2x_states,"Sl_tsoi")
+    call seq_flds_add(x2a_states,"Sl_tsoi")
+    longname = 'Soil/snow temperaure profiles'
+    stdname  = 'soil_temp_profiles'
+    units    = 'K'
+    attname  = 'Sl_tsoi'
+    call metadata_set(attname, longname, stdname, units)
+
+    ! Fraction of ground emittimg dust (not vegetated and not snow covered)
+    call seq_flds_add(l2x_states,"Sl_vdustfrac")
+    call seq_flds_add(x2a_states,"Sl_vdustfrac")
+    longname = 'Fraction of ground emittimg dust (not vegetated and not snow covered)'
+    stdname  = 'frac_ground_emitting_dust'
+    units    = '-'
+    attname  = 'Sl_vdustfrac'
+    call metadata_set(attname, longname, stdname, units)
+
+    
+    ! Surface temperature
+    call seq_flds_add(l2x_states,"Sl_tsf")
+    call seq_flds_add(x2a_states,"Sl_tsf")
+    longname = 'Surface temperature'
+    stdname  = 'surface_temperature'
+    units    = 'K'
+    attname  = 'Sl_tsf'
+    call metadata_set(attname, longname, stdname, units)
+   
     ! Surface friction velocity in land (land/atm only)
     call seq_flds_add(l2x_states,"Sl_fv")
     call seq_flds_add(x2a_states,"Sl_fv")
@@ -1941,6 +2035,28 @@ contains
     units    = 'kg m-2 s-1'
     attname  = 'Flrl_rofgwl'
     call metadata_set(attname, longname, stdname, units)
+
+    call seq_flds_add(l2x_fluxes,'Flrl_snwmelt')
+    longname = 'Water flux from land (snowmelt)'
+    stdname  = 'water_flux_from_snowmelt'
+    units    = 'kg m-2 s-1'
+    attname  = 'Flrl_snwmelt'
+    call metadata_set(attname, longname, stdname, units)
+
+   call seq_flds_add(l2x_fluxes,'Flrl_roff')
+    longname = 'Water flux from land'
+    stdname  = 'water_flux_into_total_runoff'
+    units    = 'kg m-2 s-1'
+    attname  = 'Flrl_roff'
+    call metadata_set(attname, longname, stdname, units)
+
+    call seq_flds_add(l2x_fluxes,'Flrl_srfroff')
+    longname = 'Water flux from land (liquid surface)'
+    stdname  = 'water_flux_into_surface_runoff'
+    units    = 'kg m-2 s-1'
+    attname  = 'Flrl_srfroff'
+    call metadata_set(attname, longname, stdname, units)
+
 
     call seq_flds_add(l2x_fluxes,'Flrl_rofsub')
     call seq_flds_add(x2r_fluxes,'Flrl_rofsub')

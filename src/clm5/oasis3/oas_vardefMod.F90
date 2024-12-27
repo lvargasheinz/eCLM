@@ -35,20 +35,29 @@ module oas_vardefMod
   integer ::   oas_id_sh      ! sensible heat flux (W/m2)
   integer ::   oas_id_lh      ! latent heat flux (W/m2)
   integer ::   oas_id_st      ! surface temperature (K)
-  integer ::   oas_id_flxvoc      ! radiation temperature (K)
-  integer ::   oas_id_flxdst      ! radiation temperature (K)
-  integer ::   oas_id_fluxch4      ! radiation temperature (K)
-  integer ::   oas_id_ddvel      ! radiation temperature (K)
+  integer ::   oas_id_flxvoc      ! VOC flux (size bins)
+  integer ::   oas_id_flxdst      ! dust flux (size bins)
+  integer ::   oas_id_fluxch4      ! net CH4 flux (kg C/m**2/s) [+ to atm]
+  integer ::   oas_id_ddvel      ! dry deposition velocities
   integer ::   oas_id_t2m      !  2 m height surface air temperature (Kelvin)  
   integer ::   oas_id_q2m      !  2 m height surface specific humidity (kg/kg)
   integer ::   oas_id_u10      ! atmospheric wind speed (m/s)
-  integer ::   oas_id_evpr      ! total latent heat ?? CHECK LUIZA
+  integer ::   oas_id_evpr      ! evaporation
   integer ::   oas_id_ram1      !  aerodynamical resistance (s/m)
   integer ::   oas_id_rah1      ! thermal resistance (s/m)
   integer ::   oas_id_sncv     ! snow water (mm H2O)  
   integer ::   oas_id_wt      ! fraction of ground emittimg dust
   integer ::   oas_id_zo      ! roughness length over vegetation, momentum
   integer ::   oas_id_tlef      !  vegetation temperature (Kelvin)
+  integer ::   oas_id_tlai      ! Total leaf area index at grid level
+  integer ::   oas_id_tsoi      ! ! soil/snow temperaure profils (K)
+  integer ::   oas_id_roff     ! ! Total runoff 
+  integer ::   oas_id_srfroff      ! Surface runoff
+  integer ::   oas_id_snwmelt      ! Snow melt
+  integer ::   oas_id_h2ovol      ! FAB  soil volumetric water content (m3/m3)
+  integer ::   oas_id_h2osoi_liq      ! soil water kg/m^2 (water)
+  integer ::   oas_id_h2osoi_ice      ! soil water kg/m^2 (ice)
+  integer ::   oas_id_h2o10cm      !  soil water in first 10 cm
 
   
 #endif

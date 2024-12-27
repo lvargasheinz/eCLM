@@ -28,6 +28,7 @@ module clm_cpl_indices
   integer, public ::index_l2x_Flrl_rofsub     ! lnd->rtm input liquid subsurface fluxes
   integer, public ::index_l2x_Flrl_rofi       ! lnd->rtm input frozen fluxes
   integer, public ::index_l2x_Flrl_irrig      ! irrigation withdrawal
+!  integer, public ::index_l2x_Flrl_snwmelt      ! irrigation withdrawal
 
   integer, public ::index_l2x_Sl_t            ! temperature
   integer, public ::index_l2x_Sl_tref         ! 2m reference temperature
@@ -57,6 +58,13 @@ module clm_cpl_indices
   integer, public ::index_l2x_Fall_flxvoc     ! MEGAN fluxes
   integer, public ::index_l2x_Fall_flxfire    ! Fire fluxes
   integer, public ::index_l2x_Sl_ztopfire     ! Top of fire emissions (m)
+!  integer, public ::index_l2x_Sl_rah1            ! temperature
+  integer, public ::index_l2x_Sl_vdustfrac            ! temperature
+  integer, public ::index_l2x_Sl_tsf            ! temperature
+  integer, public ::index_l2x_Sl_z0            ! temperature
+  integer, public ::index_l2x_Sl_tveg            ! temperature
+  integer, public ::index_l2x_Sl_tlai            ! temperature
+  integer, public ::index_l2x_Sl_tsoi            ! temperature
 
   ! In the following, index 0 is bare land, other indices are glc elevation classes
   integer, allocatable, public ::index_l2x_Sl_tsrf(:)   ! glc MEC temperature
@@ -176,6 +184,7 @@ contains
     index_l2x_Flrl_rofsub   = mct_avect_indexra(l2x,'Flrl_rofsub')
     index_l2x_Flrl_rofi     = mct_avect_indexra(l2x,'Flrl_rofi')
     index_l2x_Flrl_irrig    = mct_avect_indexra(l2x,'Flrl_irrig')
+!    index_l2x_Flrl_snwmelt    = mct_avect_indexra(l2x,'Flrl_snwmelt')
 
     index_l2x_Sl_t          = mct_avect_indexra(l2x,'Sl_t')
     index_l2x_Sl_snowh      = mct_avect_indexra(l2x,'Sl_snowh')
@@ -189,6 +198,12 @@ contains
     index_l2x_Sl_ram1       = mct_avect_indexra(l2x,'Sl_ram1')
     index_l2x_Sl_fv         = mct_avect_indexra(l2x,'Sl_fv')
     index_l2x_Sl_soilw      = mct_avect_indexra(l2x,'Sl_soilw',perrwith='quiet')
+!    index_l2x_Sl_rah1          = mct_avect_indexra(l2x,'Sl_rah1')
+    index_l2x_Sl_tlai          = mct_avect_indexra(l2x,'Sl_tlai')
+    index_l2x_Sl_tsf          = mct_avect_indexra(l2x,'Sl_tsf')
+    index_l2x_Sl_tveg        = mct_avect_indexra(l2x,'Sl_tveg')
+    index_l2x_Sl_vdustfrac          = mct_avect_indexra(l2x,'Sl_vdustfrac')
+    index_l2x_Sl_z0          = mct_avect_indexra(l2x,'Sl_z0')
 
     if ( lnd_drydep )then
        index_l2x_Sl_ddvel = mct_avect_indexra(l2x, trim(drydep_fields_token))
