@@ -139,7 +139,7 @@ contains
 
      call oasis_put(oas_id_tlai, seconds_elapsed,lnd2atm_inst%tlai_grc, info)   ! "CLM_TLAI"
      call oasis_put(oas_id_roff, seconds_elapsed,lnd2atm_inst%qflx_rofliq_grc, info)   ! "CLM_ROFF"
-     call oasis_put(oas_id_srf_roff, seconds_elapsed,lnd2atm_inst%qflx_rofliq_qsur_grc, info)   ! "CLM_SRFROFF"
+     call oasis_put(oas_id_srf_roff, seconds_elapsed,lnd2atm_inst%qflx_rofliq_qsur_grc+ lnd2atm_inst%qflx_rofliq_h2osfc_grc,, info)   ! "CLM_SRFROFF"
      call oasis_put(oas_id_snowmelt, seconds_elapsed,lnd2atm_inst%qflx_snowmelt_grc, info)   ! "CLM_SNWMELT"
      call oasis_put(oas_id_tsoi, seconds_elapsed,lnd2atm_inst%t_soisno_grc(:,:), info)   ! "CLM_TSOI"
      call oasis_put(oas_id_h2ovol, seconds_elapsed,lnd2atm_inst%h2osoi_vol_grc(:,:), info)   ! "CLM_H2OVOL"
