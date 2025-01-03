@@ -146,6 +146,8 @@ contains
      call oasis_put(oas_id_h2osoi_liq, seconds_elapsed,lnd2atm_inst%h2osoi_liq_grc(:,:), info)   ! "CLM_H2OLIQ"
      call oasis_put(oas_id_h2osoi_ice, seconds_elapsed,lnd2atm_inst%h2osoi_ice_grc(:,:), info)   ! "CLM_H2OICE"
      call oasis_put(oas_id_h2o10cm, seconds_elapsed,lnd2atm_inst%h2o10cm_grc, info)   ! "CLM_H2O10cm"
+     call oasis_put(oas_id_ad_full, seconds_elapsed,lnd2atm_inst%albd_grc(:,:), info)     ! "CLM_ALBED_FULL"
+     call oasis_put(oas_id_ai_full, seconds_elapsed,lnd2atm_inst%albi_grc(:,:), info)     ! "CLM_ALBEI_FULL"
 
   end subroutine oas_send_icon
 #endif

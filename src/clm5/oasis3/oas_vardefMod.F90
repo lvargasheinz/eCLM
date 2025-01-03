@@ -29,7 +29,9 @@ module oas_vardefMod
 
   integer ::   oas_id_it      ! radiation temperature (K)
   integer ::   oas_id_ad      ! direct albedo (%)
+  integer ::   oas_id_ad_full     ! direct albedo (%)
   integer ::   oas_id_ai      ! diffuse albedo (%)
+  integer ::   oas_id_ai_full      ! diffuse albedo (%)
   integer ::   oas_id_tx      ! momentum flux x (N/m2)
   integer ::   oas_id_ty      ! momentum flux y (N/m2)
   integer ::   oas_id_sh      ! sensible heat flux (W/m2)
